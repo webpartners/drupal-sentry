@@ -66,7 +66,8 @@ function sentry_get_client() {
     if ($sentry_dsn === FALSE) {
       return FALSE;
     }
-    $client = new Raven_Client($sentry_dsn);
+    $class = variable_get('sentry_class', 'Raven_Client');
+    $client = new $class($sentry_dsn);
     $client->store_errors_for_bulk_send = TRUE;
   }
 
